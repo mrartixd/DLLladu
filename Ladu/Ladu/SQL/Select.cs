@@ -42,20 +42,23 @@ namespace Ladu
             using (OleDbConnection conn = ConnectDB.GetConnection())
             {
                 conn.Open();
-                string sql = "SELECT * FROM toode";
+                string sql = "SELECT toode.ID, toode.Nimi, kategoriaFK, Kogus, KoodToode,  Hind FROM toode  INNER JOIN alamkategooria ON alamkategooria.ID = toode.kategoriaFK";
                 OleDbCommand cmd = new OleDbCommand(sql, conn);
-                OleDbCommand cmdKategoria = new OleDbCommand("SELECT * FROM Alamkategooria");
                 OleDbDataReader reader = cmd.ExecuteReader();
-                //
                 toodes = new List<Toode>();
                 using (reader)
                 {
                     while (reader.Read())
                     {
                         Toode toode = new Toode();
+                        Alamkategooria alamkategooria = new Alamkategooria();
                         toode.ID = (long)reader[0];
                         toode.Nimi = reader[1].ToString();
-                        //
+                        alamkategooria.Nimi = reader[2].ToString();
+                        toode.Kogus = (int)reader[3];
+                        toode.KoodToode = reader[4].ToString();
+                        toodes.Add(toode);
+
                     }
                 }
             }
