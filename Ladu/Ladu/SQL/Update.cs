@@ -15,7 +15,7 @@ namespace Ladu.SQL
             {
                 OleDbCommand cmd = new OleDbCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = "UPDATE klient SET Nimi = @nimi, Perekonnanimi = @perekonnanimi, Telefon = @telefon, Aadress = @aadress, Email = @email WHERE ID = @id";
+                cmd.CommandText = "UPDATE klient SET Nimi = @nimi, Perekonnanimi = @perekonnanimi, " + "Telefon = @telefon, Aadress = @aadress, Email = @email WHERE ID = @id";
                 cmd.Parameters.AddWithValue("@nimi", klient.Nimi);
                 cmd.Parameters.AddWithValue("@perekonnanimi", klient.Perekonnanimi);
                 cmd.Parameters.AddWithValue("@telefon", klient.Telefon);
